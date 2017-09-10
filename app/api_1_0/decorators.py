@@ -8,7 +8,7 @@ def permission_required(permission):
         @wraps(f)
         def decorated_function(*args, **kwargs):
             if not g.current_user.can(permission):
-                return forbidden('Insufficient permissions')
+                return forbidden('没有足够的权限s')
             return f(*args, **kwargs)
         return decorated_function
     return decorator

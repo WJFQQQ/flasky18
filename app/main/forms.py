@@ -1,37 +1,36 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, BooleanField, SelectField,\
     SubmitField
-from wtforms.validators import Required, Length, Email, Regexp
+from wtforms.validators import DataRequired, Length, Email, Regexp
 from wtforms import ValidationError
 from flask_pagedown.fields import PageDownField
 from ..models import Role, User
 
 
 class NameForm(FlaskForm):
-    name = StringField('What is your name?', validators=[Required()])
-    submit = SubmitField('Submit')
+    name = StringField('你想写点什么呢?', validators=[DataRequired()])
+    submit = SubmitField('确定')
 
 
 class EditProfileForm(FlaskForm):
-    name = StringField('Real name', validators=[Length(0, 64)])
-    location = StringField('Location', validators=[Length(0, 64)])
-    about_me = TextAreaField('About me')
-    submit = SubmitField('Submit')
+    name = StringField('姓名', validators=[Length(0, 64)])
+    location = StringField('地址', validators=[Length(0, 64)])
+    about_me = TextAreaField('关于我')
+    submit = SubmitField('确定')
 
 
 class EditProfileAdminForm(FlaskForm):
-    email = StringField('Email', validators=[Required(), Length(1, 64),
+    email = StringField('邮箱', validators=[DataRequired(), Length(1, 64),
                                              Email()])
-    username = StringField('Username', validators=[
-        Required(), Length(1, 64), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
-                                          'Usernames must have only letters, '
-                                          'numbers, dots or underscores')])
-    confirmed = BooleanField('Confirmed')
+    username = StringField('用户名', validators=[
+        DataRequired(), Length(1, 64), Regexp('^[A-Za-z][A-Za-z0-9_.]', 0,
+                                          '用户名必须包含字母和数字')])
+    confirmed = BooleanField('确定')
     role = SelectField('Role', coerce=int)
-    name = StringField('Real name', validators=[Length(0, 64)])
-    location = StringField('Location', validators=[Length(0, 64)])
-    about_me = TextAreaField('About me')
-    submit = SubmitField('Submit')
+    name = StringField('姓名', validators=[Length(0, 64)])
+    location = StringField('地址', validators=[Length(0, 64)])
+    about_me = TextAreaField('关于我')
+    submit = SubmitField('确定')
 
     def __init__(self, user, *args, **kwargs):
         super(EditProfileAdminForm, self).__init__(*args, **kwargs)
@@ -42,19 +41,19 @@ class EditProfileAdminForm(FlaskForm):
     def validate_email(self, field):
         if field.data != self.user.email and \
                 User.query.filter_by(email=field.data).first():
-            raise ValidationError('Email already registered.')
+            raise ValidationError('邮箱已经被注册.')
 
     def validate_username(self, field):
         if field.data != self.user.username and \
                 User.query.filter_by(username=field.data).first():
-            raise ValidationError('Username already in use.')
+            raise ValidationError('用户名已经存在.')
 
 
 class PostForm(FlaskForm):
-    body = PageDownField("What's on your mind?", validators=[Required()])
-    submit = SubmitField('Submit')
+    body = PageDownField("你想写点什么呢?", validators=[DataRequired()])
+    submit = SubmitField('确定')
 
 
 class CommentForm(FlaskForm):
-    body = StringField('Enter your comment', validators=[Required()])
-    submit = SubmitField('Submit')
+    body = StringField('来，开始你的故事', validators=[DataRequired()])
+    submit = SubmitField('确定')

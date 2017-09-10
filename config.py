@@ -13,7 +13,7 @@ class Config:
     MAIL_USE_SSL = True
     MAIL_USERNAME = '18202424393@163.com'
     MAIL_PASSWORD = 'b62660313'
-    FLASKY_MAIL_SUBJECT_PREFIX = '[Flasky]'
+    FLASKY_MAIL_SUBJECT_PREFIX = '狂战斧'
     MAIL_SENDER = '狂战斧的管理员<18202424393@163.com>'#必须有具体邮箱
     FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN')#为何设置的无法提取出来
     FLASKY_POSTS_PER_PAGE = 20
