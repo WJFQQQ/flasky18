@@ -31,7 +31,7 @@ def create_app(config_name):
     pagedown.init_app(app)
 
     if not app.debug and not app.testing and not app.config['SSL_DISABLE']:
-        from flask_sslify import SSLify
+        from  flask_sslify import SSLify #flask_sslify
         sslify = SSLify(app)
 
     from .main import main as main_blueprint
