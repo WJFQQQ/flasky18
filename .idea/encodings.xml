@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" useUTFGuessing="false" native2AsciiForPropertiesFiles="false" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/auth/change_email.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/auth/change_password.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/templates/auth/email/change_email.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/auth/email/change_email.txt" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/auth/email/confirm.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/auth/email/confirm.txt" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/auth/email/reset_password.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/auth/email/reset_password.txt" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/auth/login.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/auth/register.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/auth/reset_password.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/auth/unconfirmed.html" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
