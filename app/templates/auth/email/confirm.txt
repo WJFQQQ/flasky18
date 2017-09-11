@@ -1,4 +1,4 @@
-亲爱的 {{ user.username }},
+﻿亲爱的 {{ user.username }},
 
 欢迎来到狂战斧!
 

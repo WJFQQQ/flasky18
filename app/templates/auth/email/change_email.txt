@@ -1,4 +1,4 @@
-亲爱的 {{ user.username }},
+﻿亲爱的 {{ user.username }},
 
 为了确认你的新邮箱地址 请点击下面的链接:
 
