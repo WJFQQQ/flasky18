@@ -1,0 +1,159 @@
+17-7-12 ：无法正常显示404页面
+17-7-12：jinja2.exceptions.TemplateNotFound index.html
+	解决方法： 在template中新建一个index.html文件 编写模板
+
+17.7-13：解决了 bootstrap无法运行的问题
+	解决方法： 由于其他的虚拟环境没有安装bootstrap模块 所以在创建的时候必须在I/Apython 目录下
+
+17.7-14：this inspection detects names that should resolve but do not. Due to dynamic dispatch and duck typing.This is possible in a limit
+	but useful of cases.Top-level and class-level items are supported better than instance 
+	翻译：此检查应该解决但不执行的名称。由于动态调度和鸭打字，这是可能的但是有用的案例。顶层和类级项目比实例支持更好。
+
+
+17.7-17： 当模块在git中安装无法失效（ImportError: No module named 'flask_sqlalchemy'）时，可以在pycharm下直接安装，
+	于是通过在 Settings/Preferences 对话框中选中 Project Interpreter页面,开始安装:
+
+
+17.7-17： 读取文件时，若文件名为中文，应该使用反斜杠，如：f =open('C:/Users/WJF/Desktop/过程.txt','r')
+
+17.7-17：with open('text.txt', 'w') as f:
+    		f.write('今天是 ')
+	这样子可以不必调用f.close()
+
+17.7-18： %s,表示格式化一个对象为字符
+
+
+17.7-20：	（1）   在书上的35页，有wtforms 支持的HTML标准字段和验证函数有说明 
+			http://blog.csdn.net/happy_bigqiang/article/details/50898213
+
+		（2）	session -- 请求上下文
+			用户对话，用于存储之间需要记住的值的字典
+
+		（3）	validators -- 验证器（验证参数）
+
+
+
+17.7-26：	关于发出邮件无法收到的问题
+		（1）使用错误的smtp码
+		（2）设定的MAIL_USER_TLS 但是却天上了SSL的编码 应该改为MAIL_USER_SSL
+
+		接收邮件的内容
+		（1）	>>> msg.body='text body'
+			>>> msg.html='<b>Hello</b> wjf'--再次填入内容，必须要有<b></b> 否则会被认为是垃圾邮件QAQ
+
+17.8.7:		Could not build url for endpoint 'main.index'. Did you mean 'auth.login' instead?
+		解决方法：
+			   问题出在 base.html上，需要按照书上的格式写。
+
+17.8-14：	登陆表单的 LOGIN 函数 编写正确但是没有办法在网页中形成视图。。。
+			解决方法：
+				
+17.8-17：	AttributeError: 'User' object has no attribute 'confirmed'
+		解决方法， 在User 模型中 ，添加正确的 关于 confirm.html的路径 使得他们正确链接
+
+17.8-18：	AssertionError: View function mapping is overwriting an existing endpoint function: auth.register
+		解决方法：程序中 register函数重复了，应该删除掉一个
+
+17.8-18：	sqlalchemy.exc.InvalidRequestError: This Session's transaction has been rolled back due to a previous exception during flush.
+		解决方法： 在 models.py 中，只要用try...except在except中rollback回滚事务就可以了！
+						try:
+						#....
+						db.session.commit()
+						except:
+						#....
+						db.session.rollback()
+						即可解决
+
+17.8-19：	sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: roles.default
+		 [SQL: 'SELECT roles.id AS roles_id, roles.name AS roles_name, roles."                                                                                                             
+		default" AS roles_default, roles.permissions AS roles_permissions \nFROM roles \n  
+		 WHERE roles.name = ?\n LIMIT ? OFFSET ?'] [parameters: ('Administrator', 1, 0)]
+		解决方法：数据库没有注册roles.default 不知道如何解决，所以复制了flask_web的 9a 中的数据库 即可解决。
+
+		新的解决方法： 运行 python xx.py shell 然后 
+					db.drop_all() #删除原有数据库
+					db.create_all() #创建一个新的数据库
+				退出shell 之后，python xx.py db upgrade  
+				最后， runserver 就可以了~
+
+17.8-20：	alembic.util.exc.CommandError: Can't locate revision identified by '56ed7d33de8d'
+		解决方法： 将migrations/versions 中的最新版本删除掉 再 进行 python manage.py db upgrade 就可以
+
+
+
+17.8-24：	smtplib.SMTPAuthenticationError: (535, b'Error: authentication failed')
+		解决方法; 你的password输入错误，导致无法登陆邮箱。 建议  重新修改 smtp 的密码  用这个密码登陆。
+			  因为我之前设置的一次密码 不管怎么登陆都不好用。修改密码之后就可以用了
+
+17.8-24：	AssertionError: The message does not specify a sender and a default sender has n                                                                                                             ot been configured
+
+		解决方法； 你在环境变量中设置的 username password  sender 无法被识别。
+			   建议直接在config 中填写邮箱和 smtp 的密码。这样子就跳过了在变量中读取账号密码这一步。
+			   等上传到GITHUB的时候再把 邮箱修改。
+
+17.8-26： sqlalchemy.exc.InvalidRequestError: Entity '<class 'app.models.Role'>' has no pr
+
+17.8。28： 如何添加导航栏缩略图
+
+17.8-28：	sqlalchemy.exc.InvalidRequestError: One or more mappers failed to initialize - can't proceed with initialization of other mappers. Triggering mapper: 'Mapper|User|users'. Original exception was: Could not determine join condition between parent/child tables on relationship User.posts - there are no foreign keys linking these tables.  Ensure that referencing columns are associated with a ForeignKey or ForeignKeyConstraint, or specify a 'primaryjoin' expression.
+
+17-8-31：sqlalchemy.exc.InvalidRequestError: Entity '<class 'app.models.Role'>' has no property 'permission'	
+	 解决方法：  将FLASKY_ADMIN 改为 在环境变量中设置 	
+
+17.9.2:博客首页无法显示出博文的问题：
+	解决方法： 第一步  将数据库完全清空 db.drop_all() ....
+		   第二步  运行 python shell 在里面输入 Role.insert_roles()--Role.query.all()
+		   第三步  运行 python runserver  进行注册
+
+17.9.2:jinja2.exceptions.UndefinedError: 'app.models.AnonymousUser object' has no attribute 'gravatar'	
+
+17.9.4 UnicodeEncodeError: 'ascii' codec can't encode characters in position 654-656: ordinal not in range(128)
+	只要templates/auth中的发送邮件功能的html文件 中出现中文 就会有这个错误 如何解决？                                                                                                             rdinal not in range(128)
+
+
+17.9.7：Login is currently incompatible with git bash/Cygwin
+	解决方法：将git 卸载 重新安装的时候选择 use windows default consile window 这版本就可以解决！	
+		https://github.com/heroku/cli/issues/84	
+
+17.9.7：Couldn't find either the add-on service or the add-on plan of "heroku-postgresql:wjf-dev"	
+
+	解决方法： 先git remote rm heroku 删除postgresql  
+		   然后	heroku git:remote -a 《name》 创建想要的postgresql
+
+17.9.7：That add-on plan is only available to select users.
+	解决方法 ：将dev 换成hobby-dev即可
+
+17.9-7:Unknown database: HEROKU_POSTGRESQL_BROWN_URL. Valid options are: DATABASE_URLS
+	解决方法：删除原有postgresql 重新创建 再 promote即可
+
+17.9.8:error: failed to push some refs to 'https://git.heroku.com/aqueous-cliffs-34521.git'
+	解决方法：缺少了 Procfile 脚本
+		在 GIT BASH 中  直接vi Procfile 创建procfile 
+		然后在按 tab 其中输入 	web: gunicorn app:app 
+		就可以 push 了  具体教程 http://blog.csdn.net/westenboy/article/details/50612569
+
+17.9.10： at=error code=H14 desc="No web processes running"
+	 解决方法：Procfile 中的 web: gunicorn xxx:app 。 这个xxx 必须是启动脚本的名字
+		   我的启动脚本名为 manage.py 所以 我的是web: gunicorn manage:app 
+
+17.9.10：
+	2017-09-10T12:29:41.692902+00:00 app[web.1]:     message.as_string())
+	2017-09-10T12:29:41.692903+00:00 app[web.1]:   File "/app/.heroku/python/lib/python3.6/smtplib.py", line 855, in sendmail
+	2017-09-10T12:29:41.692903+00:00 app[web.1]:     msg = _fix_eols(msg).encode('ascii')
+	2017-09-10T12:29:41.692904+00:00 app[web.1]: UnicodeEncodeError: 'ascii' codec can't encode characters in position 697-699: ordinal not in range(128)
+	解决方法：在 app/email.py头部导入
+			from email import charset
+			charset.add_charset('utf-8', charset.SHORTEST, charset.BASE64, 'utf-8')	
+		  接着在Message关键字参数中 添加 utf-8
+			msg = Message(app.config['FLASKY_MAIL_SUBJECT_PREFIX'] +
+  ' ' + subject,
+                  
+               sender=app.config['FLASKY_MAIL_SENDER'],
+    
+           			recipients=[to],charset='utf-8'))   
+	#加入该关键字参数，使发送的html支持utf-8编码
+
+作者：
+	简书地址：http://www.jianshu.com/p/f2b72faf268e
+
+	远作者地址：http://qiita.com/yasunori/items/117d4b138192310295c1（日本）
